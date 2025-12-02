@@ -1,14 +1,13 @@
 # Khai báo biến danh sách toàn cục products
 products = []
 
-# Hàm thêm sản phẩm
+# Hàm thêm sản phẩm (Đã có từ Feature 1)
 def add_product():
     print("\n--- NHẬP HÀNG ---")
-
+    
     # Nhập dữ liệu từ người dùng
     name = input("Nhập tên sản phẩm: ")
-
-    # Thêm logic kiểm tra kiểu dữ liệu đơn giản
+    
     while True:
         try:
             price = int(input("Nhập giá bán (VNĐ): "))
@@ -33,16 +32,38 @@ def add_product():
         'price': price,
         'qty': quantity
     }
-
+    
     # Lưu vào danh sách toàn cục
     products.append(new_product)
     print(f"\n✅ Đã thêm sản phẩm '{name}' vào kho hàng.")
 
-# Định nghĩa hàm main() hiển thị menu
+# Hàm xem tồn kho (MỚI - Feature 2)
+def view_inventory():
+    print("\n--- DANH SÁCH TỒN KHO ---")
+    
+    if not products:
+        print("Kho hàng hiện không có sản phẩm nào.")
+        return
+
+    # Định dạng tiêu đề bảng
+    print(f"{'STT':<5}{'TÊN SẢN PHẨM':<30}{'GIÁ BÁN':<15}{'TỒN KHO':<10}")
+    print("-" * 60)
+    
+    # Duyệt danh sách và in ra thông tin
+    for index, product in enumerate(products):
+        stt = index + 1
+        name = product['name']
+        price = f"{product['price']:,}".replace(",", ".") # Định dạng tiền tệ
+        qty = product['qty']
+        
+        print(f"{stt:<5}{name:<30}{price:<15}{qty:<10}")
+    print("-" * 60)
+
+# Định nghĩa hàm main() hiển thị menu (Đã cập nhật)
 def main():
     print("--- MENU QUẢN LÝ KHO HÀNG ---")
     print("1. Thêm sản phẩm")
-    print("2. Xem danh sách sản phẩm")
+    print("2. Xem danh sách sản phẩm") # Đã cập nhật
     print("3. Cập nhật sản phẩm")
     print("4. Xóa sản phẩm")
     print("5. Thoát")
@@ -50,34 +71,14 @@ def main():
     while True:
         choice = input("\nChọn chức năng (1-5): ")
         if choice == '1':
-            add_product()  # Gọi hàm thêm sản phẩm
+            add_product()
+        elif choice == '2':
+            view_inventory() # Gọi hàm xem tồn kho MỚI
         elif choice == '5':
             print("Tạm biệt! Chương trình đã kết thúc.")
             break
-        # Thêm logic cho các lựa chọn khác sau này
         else:
             print("Chức năng không hợp lệ. Vui lòng chọn lại.")
-
-# Khởi chạy chương trình
-if __name__ == "__main__":
-    main()# Khai báo biến danh sách toàn cục products
-products = []
-
-# Định nghĩa hàm main() hiển thị menu
-def main():
-    print("--- MENU QUẢN LÝ KHO HÀNG ---")
-    print("1. Thêm sản phẩm")
-    print("2. Xem danh sách sản phẩm")
-    print("3. Cập nhật sản phẩm")
-    print("4. Xóa sản phẩm")
-    print("5. Thoát")
-
-    # Bạn có thể thêm vòng lặp và logic chọn chức năng tại đây sau
-    # while True:
-    #     choice = input("Chọn chức năng (1-5): ")
-    #     if choice == '5':
-    #         break
-    #     # Logic xử lý các lựa chọn khác
 
 # Khởi chạy chương trình
 if __name__ == "__main__":
