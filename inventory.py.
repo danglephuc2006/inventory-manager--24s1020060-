@@ -1,6 +1,68 @@
 # Khai báo biến danh sách toàn cục products
 products = []
 
+# Hàm thêm sản phẩm
+def add_product():
+    print("\n--- NHẬP HÀNG ---")
+
+    # Nhập dữ liệu từ người dùng
+    name = input("Nhập tên sản phẩm: ")
+
+    # Thêm logic kiểm tra kiểu dữ liệu đơn giản
+    while True:
+        try:
+            price = int(input("Nhập giá bán (VNĐ): "))
+            if price <= 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("Giá bán phải là số nguyên dương. Vui lòng nhập lại.")
+
+    while True:
+        try:
+            quantity = int(input("Nhập số lượng tồn kho: "))
+            if quantity < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("Số lượng phải là số nguyên không âm. Vui lòng nhập lại.")
+
+    # Tạo Dictionary sản phẩm
+    new_product = {
+        'name': name,
+        'price': price,
+        'qty': quantity
+    }
+
+    # Lưu vào danh sách toàn cục
+    products.append(new_product)
+    print(f"\n✅ Đã thêm sản phẩm '{name}' vào kho hàng.")
+
+# Định nghĩa hàm main() hiển thị menu
+def main():
+    print("--- MENU QUẢN LÝ KHO HÀNG ---")
+    print("1. Thêm sản phẩm")
+    print("2. Xem danh sách sản phẩm")
+    print("3. Cập nhật sản phẩm")
+    print("4. Xóa sản phẩm")
+    print("5. Thoát")
+
+    while True:
+        choice = input("\nChọn chức năng (1-5): ")
+        if choice == '1':
+            add_product()  # Gọi hàm thêm sản phẩm
+        elif choice == '5':
+            print("Tạm biệt! Chương trình đã kết thúc.")
+            break
+        # Thêm logic cho các lựa chọn khác sau này
+        else:
+            print("Chức năng không hợp lệ. Vui lòng chọn lại.")
+
+# Khởi chạy chương trình
+if __name__ == "__main__":
+    main()# Khai báo biến danh sách toàn cục products
+products = []
+
 # Định nghĩa hàm main() hiển thị menu
 def main():
     print("--- MENU QUẢN LÝ KHO HÀNG ---")
