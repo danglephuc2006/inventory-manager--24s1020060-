@@ -1,6 +1,5 @@
 # Khai báo biến danh sách toàn cục products
 products = []
-
 # Hàm thêm sản phẩm (Đã có từ Feature 1)
 def add_product():
     print("\n--- NHẬP HÀNG ---")
