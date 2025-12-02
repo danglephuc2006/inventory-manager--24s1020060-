@@ -1,6 +1,5 @@
 # Khai báo biến danh sách toàn cục products
 products = []
-
 # Hàm thêm sản phẩm (Đã có từ Feature 1)
 def add_product():
     print("\n--- NHẬP HÀNG ---")
@@ -58,28 +57,58 @@ def view_inventory():
         
         print(f"{stt:<5}{name:<30}{price:<15}{qty:<10}")
     print("-" * 60)
+# Hàm cảnh báo hết hàng (MỚI - Feature 3)
+def check_low_stock():
+    THRESHOLD = 5 # Ngưỡng cảnh báo tồn kho thấp
+    low_stock_items = []
+
+    for product in products:
+        if product['qty'] < THRESHOLD:
+            low_stock_items.append(product)
+            
+    print("\n--- CẢNH BÁO TỒN KHO THẤP (< 5) ---")
+
+    if not low_stock_items:
+        print("🎉 Tất cả sản phẩm đều có đủ hàng (trên 5).")
+        return
+
+    # In ra danh sách sản phẩm tồn kho thấp
+    print(f"{'TÊN SẢN PHẨM':<30}{'TỒN KHO':<10}")
+    print("-" * 40)
+    
+    for product in low_stock_items:
+        name = product['name']
+        qty = product['qty']
+        print(f"{name:<30}{qty:<10}")
+    print("-" * 40)
 
 # Định nghĩa hàm main() hiển thị menu (Đã cập nhật)
 def main():
     print("--- MENU QUẢN LÝ KHO HÀNG ---")
     print("1. Thêm sản phẩm")
-    print("2. Xem danh sách sản phẩm") # Đã cập nhật
-    print("3. Cập nhật sản phẩm")
-    print("4. Xóa sản phẩm")
-    print("5. Thoát")
+    print("2. Xem danh sách sản phẩm")
+    print("3. Cảnh báo hết hàng") # MỤC MỚI
+    print("4. Cập nhật sản phẩm (Chưa làm)")
+    print("5. Xóa sản phẩm (Chưa làm)")
+    print("6. Thoát")
 
     while True:
-        choice = input("\nChọn chức năng (1-5): ")
+        choice = input("\nChọn chức năng (1-6): ")
         if choice == '1':
             add_product()
         elif choice == '2':
-            view_inventory() # Gọi hàm xem tồn kho MỚI
-        elif choice == '5':
+            view_inventory()
+        elif choice == '3':
+            check_low_stock() # Gọi hàm mới
+        elif choice == '6':
             print("Tạm biệt! Chương trình đã kết thúc.")
             break
+        elif choice in ('4', '5'):
+             print("Chức năng này chưa được triển khai.")
         else:
             print("Chức năng không hợp lệ. Vui lòng chọn lại.")
 
 # Khởi chạy chương trình
 if __name__ == "__main__":
+    # Đảm bảo bạn gọi hàm main() sau khi đã định nghĩa
     main()
